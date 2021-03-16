@@ -1,11 +1,12 @@
 import pandas as pd
-import yfinance
+import yfinance as yf
 
 
 class Portfolio:
     def __init__(self, transactions):
         self.trades = self._read_transactions(transactions)
         self.holdings = self._generate_holdings()
+        self.returns = self._generate_returns()
 
     def _read_transactions(self, transactions):
         df = pd.read_csv(
@@ -28,3 +29,10 @@ class Portfolio:
             df.loc[date, "quantity"] = self.trades.loc[date, "quantity"].sum()
             df.loc[date, "cost"] = self.trades.loc[date, "cost"].sum()
         return df
+
+    def _generate_returns(self):
+        start_date = self.holdings.index.min()
+        end_date = pd.to_datetime("today")
+        daterange = pd.date_range(start_date, end_date)
+        for date in daterange:
+            print(date)
