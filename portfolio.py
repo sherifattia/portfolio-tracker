@@ -11,6 +11,11 @@ class Portfolio:
             parse_dates=["Date"],
             dtype={"Symbol": "str", "Quantity": "float", "Price": "float"},
         )
-        self.trades = self.trades.rename(columns={"Date": "date","Symbol": "symbol","Quantity": "quantity","Price": "price"})
+        self.trades = self.trades.rename(
+            columns={"Date": "date", "Symbol": "symbol", "Quantity": "quantity", "Price": "price"}
+        )
         self.trades = self.trades.sort_values(by="date")
+        self.holdings = self._generate_holdings()
 
+    def _generate_holdings(self):
+        pass
