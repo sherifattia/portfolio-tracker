@@ -31,8 +31,11 @@ class Portfolio:
         return df
 
     def _generate_returns(self):
-        start_date = self.holdings.index.min()
-        end_date = pd.to_datetime("today")
+        start_date = self.holdings.index.min() + pd.Timedelta(days=1)
+        end_date = pd.to_datetime("today") - pd.Timedelta(days=1)
         daterange = pd.date_range(start_date, end_date)
+        symbol = yf.Ticker('PLTR')
+        prices = symbol.history(start=start_date)
+        df = pd.DataFrame(columns=["symbol", "market_value", "cost", "profit", "return"])
         for date in daterange:
-            print(date)
+            pass
