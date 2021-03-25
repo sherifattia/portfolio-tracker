@@ -11,12 +11,11 @@ class Portfolio:
     def _read_transactions(self, transactions):
         df = pd.read_csv(
             transactions,
-            usecols=["Date", "Symbol", "Quantity", "Price"],
-            index_col=["Date"],
-            parse_dates=["Date"],
-            dtype={"Symbol": "str", "Quantity": "float", "Price": "float"},
+            usecols=["date", "symbol", "quantity", "price"],
+            index_col=["date"],
+            parse_dates=["date"],
+            dtype={"symbol": "str", "quantity": "float", "price": "float"},
         )
-        df = df.rename(columns={"Symbol": "symbol", "Quantity": "quantity", "Price": "price"})
         df.index.name = "date"
         df = df.sort_values(by=["date"])
         df["cost"] = df.quantity * df.price
