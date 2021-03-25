@@ -8,6 +8,21 @@ class Portfolio:
         self.holdings = self._generate_holdings()
         self.returns = self._generate_returns()
 
+    def market_value(date=None):
+        pass
+
+    def amount_invested(date=None):
+        pass
+
+    def profit(date=None):
+        # market_value - amount_invested
+        pass
+
+    def return_generated(date=None)
+        # profit / amount_invested
+        pass
+
+
     def _read_transactions(self, transactions):
         df = pd.read_csv(
             transactions,
@@ -32,9 +47,10 @@ class Portfolio:
     def _generate_returns(self):
         start_date = self.holdings.index.min() + pd.Timedelta(days=1)
         end_date = pd.to_datetime("today") - pd.Timedelta(days=1)
-        daterange = pd.date_range(start_date, end_date)
-        symbol = yf.Ticker('PLTR')
+        date_range = pd.date_range(start_date, end_date)
+        # TODO: Support multiple symbols
+        symbol = yf.Ticker("PLTR")
         prices = symbol.history(start=start_date)
-        df = pd.DataFrame(columns=["symbol", "market_value", "cost", "profit", "return"])
-        for date in daterange:
+        df = pd.DataFrame(columns=["symbol", "price", "quantity", "market_value", "cost", "profit", "return"])
+        for date in date_range:
             pass
